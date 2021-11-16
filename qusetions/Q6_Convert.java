@@ -24,7 +24,6 @@ public class Q6_Convert {
         for(int j=0; j<numRows; j++){
             sNew.append(rows.get(j));
         }
-
         return sNew.toString();
     }
 
@@ -32,6 +31,5 @@ public class Q6_Convert {
         Q6_Convert q6 = new Q6_Convert();
         System.out.println(q6.convert("PAYPALISHIRING",4));
     }
-
 
 }
