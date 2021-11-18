@@ -75,5 +75,5 @@ public class Q679_JudgePoint24 {
         }
         return result;
     }
-    
+
 }
