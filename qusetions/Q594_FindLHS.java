@@ -1,41 +1,79 @@
 package qusetions;
 
-public class Q594_FindLHS {
-    // bug version
-    public int findLHS(int[] nums) {
-        int  maxLen =0;
-        for(int i=0;i<nums.length;i++){
-            int len1 = 0, len2 =0,len =0;
-            int min=nums[i],max=nums[i];
-            int min1=nums[i],max1=nums[i]+1;
-            for(int j=i;j<nums.length;j++){
-                if(nums[j]<min1||nums[j]>max1){
-                    continue;
-                }
-                max = Math.max(nums[j],max);
-                len1++;
-            }
-            int min2=nums[i]-1,max2=nums[i];
-            for(int j=i;j<nums.length;j++){
-                if(nums[j]<min2||nums[j]>max2){
-                    continue;
-                }
-                min = Math.min(nums[j],min);
-                len2++;
-            }
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
-            len1 = (max-max1==0)?len1 : 0;
-            len2 = (min-min2==0)?len2 : 0;
-            len =Math.max(len1,len2);
-            maxLen = Math.max(maxLen, len);
+public class Q594_FindLHS {
+    // 先排序，再遍历
+    public int findLHS(int[] nums) {
+        int len=1;
+        int len2=0;
+        int maxLen=0;
+        Arrays.sort(nums);
+        for(int i=1; i<nums.length; i++){
+            if(nums[i]==nums[i-1]){
+                len++;
+                if(len2>0){
+                    len2++;
+                }
+                continue;
+            }
+            maxLen=Math.max(maxLen,len2);
+            if(nums[i]==nums[i-1]+1){
+                len2=len+1;
+                maxLen=Math.max(maxLen,len2);
+            }
+            else{
+                len2=0;
+            }
+            len=1;
+        }
+        maxLen=Math.max(maxLen,len2);
+        return maxLen;
+    }
+    // 先遍历，滑动窗口求解
+    public int findLHS_2(int[] nums) {
+        int start = 0, end = 0;
+        int maxLen=0;
+        Arrays.sort(nums);
+        for(end=0;end<nums.length;end++){
+            if(nums[end]-nums[start]>1){
+                start++;
+            }
+            if(nums[end]-nums[start]==1){
+                maxLen = Math.max(maxLen, end-start+1);
+            }
+        }
+        return maxLen;
+
+    }
+    // 哈希表
+    public int findLHS_3(int[] nums) {
+        int maxLen = 0;
+        Map<Integer, Integer> numsHM = new HashMap<>();
+        for (int i=0;i<nums.length;i++){
+            if(!numsHM.containsKey(nums[i])){
+                numsHM.put(nums[i],1);
+            }
+            else{
+                numsHM.put(nums[i],numsHM.get(nums[i])+1);
+            }
+        }
+        for(Integer key : numsHM.keySet()){
+            if(numsHM.containsKey(key+1)){
+                maxLen = Math.max(maxLen, numsHM.get(key)+numsHM.get(key+1));
+            }
         }
         return maxLen;
     }
 
+
     public static void main(String[] args) {
         Q594_FindLHS q594 = new Q594_FindLHS();
         int[] nums = {2,2,2,2,2,2,2,3,1,0,0,0,3,1,-1,0,1,1,0,0,1,1,2,2,2,0,1,2,2,3,2};
-        System.out.println(q594.findLHS(nums));
+        int a =q594.findLHS_3(nums);
+        System.out.println(a);
     }
 
 
