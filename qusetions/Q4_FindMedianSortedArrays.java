@@ -1,6 +1,7 @@
 package qusetions;
 
 public class Q4_FindMedianSortedArrays {
+    // 合并排序，复杂度O(M+N)
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int len1 = nums1.length, len2 = nums2.length;
         int i = 0, j = 0, k = 0;
@@ -23,6 +24,7 @@ public class Q4_FindMedianSortedArrays {
             return ((double)(nums[k/2]+nums[k/2+1]))/2;
         }
     }
+    // 二分法查找第K个数
     public double findMedianSortedArrays_2(int[] nums1, int[] nums2) {
         int len = nums1.length + nums2.length;
         if(len%2==0){
