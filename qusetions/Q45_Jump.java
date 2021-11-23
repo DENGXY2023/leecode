@@ -3,28 +3,38 @@ package qusetions;
 public class Q45_Jump {
     // 贪心算法，正向
     public int jump(int[] nums) {
-        int start = 0, next =0;
-        int startFast = 0, nextFast = 0;
+        int position = 0;
         int jumps = 0;
-        if(nums.length==1){
-            return 0;
-        }
-        while(next<nums.length-1){
-            startFast = start+nums[start];
-            if(startFast>nums.length-1){
+        while (position<nums.length-1){
+            int nextPos=0, secondPos = 0, secondMaxPos = 0;
+            if(position+nums[position]>=nums.length-1){
                 jumps++;
                 break;
             }
-            int nextMostFast = 0;
-            for(int i = start+1;i<=startFast;i++){
-                nextFast = i+nums[i];
-                if(nextFast>nextMostFast){
-                    next = i;
-                    nextMostFast = nextFast;
+            for(int i =position+1;i<=position+nums[position];i++){
+                secondPos = i+nums[i];
+                if(secondPos>secondMaxPos){
+                    nextPos = i;
+                    secondMaxPos = secondPos;
                 }
             }
-            start = next;
+            position = nextPos;
             jumps++;
+        }
+        return jumps;
+    }
+    //
+    public int jump_2(int[] nums) {
+        int position = nums.length-1;
+        int jumps = 0;
+        while (position>0){
+            for(int i=0; i<position; i++){
+                if(i+nums[i]>=position){
+                    position=i;
+                    jumps++;
+                    break;
+                }
+            }
         }
         return jumps;
     }
