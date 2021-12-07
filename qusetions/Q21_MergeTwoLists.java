@@ -20,7 +20,7 @@ public class Q21_MergeTwoLists {
         prev.next = list1==null?list2:list1;
         return start.next;
     }
-    // 迭代
+    // 递归
     public ListNode mergeTwoLists_2(ListNode list1, ListNode list2) {
         if(list1==null){
             return list2;
