@@ -24,21 +24,17 @@ public class Q50_MyPow {
     public double pow(double x, int n){
         double res = 1.0;
         while(n>0){
-            if(n%2==0){
-//                res*=x*x;
-                x=x*x;
-                n/=2;
-            }
-            else{
+            if(n%2==1){
                 res*=x;
-                n--;
             }
+            x*=x;
+            n/=2;
         }
         return res;
     }
 
     public static void main(String[] args) {
         Q50_MyPow q50 = new Q50_MyPow();
-        System.out.println(q50.pow(2,10));
+        System.out.println(q50.pow(2,11));
     }
 }
