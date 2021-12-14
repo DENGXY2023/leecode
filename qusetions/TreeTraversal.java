@@ -140,6 +140,6 @@ public class TreeTraversal {
     public static void main(String[] args) {
         TreeTraversal q94 = new TreeTraversal();
         TreeNode root = new TreeNode(1,null,new TreeNode(2,new TreeNode(3,null,null),null));
-        List<Integer> res = q94.postorderTraversal(root);
+        List<Integer> res = q94.preorderTraversal(root);
     }
 }
