@@ -35,4 +35,5 @@ public class Q47_PermuteUnique {
         List<List<Integer>> res = q47.permuteUnique(nums);
         System.out.println(res);
     }
+    
 }
