@@ -56,7 +56,7 @@ public class Q28_StrStr {
 
     public static void main(String[] args) {
         Q28_StrStr q28 = new Q28_StrStr();
-        String str1 = "cdaabaaab";
+        String str1 = "cdaaaabaabbaabaaab";
         String str2 = "aabaaab";
         int a = q28.strStr_2(str1, str2);
         System.out.println(a);
